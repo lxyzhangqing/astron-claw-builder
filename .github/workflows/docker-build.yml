@@ -22,14 +22,15 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN }}
 
       - name: 构建并推送镜像
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: Dockerfile
           platforms: linux/amd64
           push: true
-          tags: lxyzhangqing/astronclaw-base:latest
+          tags: ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
